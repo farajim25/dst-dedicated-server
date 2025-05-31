@@ -20,4 +20,12 @@ then
 fi
 
 cd $HOME/server_dst/bin
-./dontstarve_dedicated_server_nullrenderer -cluster DSTWhalesCluster -shard "$SHARD_NAME"
+# ./dontstarve_dedicated_server_nullrenderer -cluster DSTWhalesCluster -shard "$SHARD_NAME"
+
+run_shared=(./dontstarve_dedicated_server_nullrenderer_x64)
+run_shared+=(-console)
+run_shared+=(-cluster DSTWhalesCluster)
+run_shared+=(-monitor_parent_process $$)
+
+"${run_shared[@]}" -shard Caves  | sed 's/^/Caves:  /' &
+"${run_shared[@]}" -shard Master | sed 's/^/Master: /'
